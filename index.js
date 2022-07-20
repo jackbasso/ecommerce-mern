@@ -1,6 +1,8 @@
 //Express import
 const express = require("express");
 const app =  express();
+//Routes import
+const userRoute = require("./routes/user.js");
 //dotEnv import
 const dotenv = require("dotenv");
 dotenv.config();
@@ -13,10 +15,13 @@ mongoose.connect(process.env.MONGO_URL)
     console.log(error)
   ));
 
+//for incomming json bodies
+app.use(express.json())
 //Endpoints
-app.get("/api/test", () => {
-  console.log("test is succesfull")
-})
+app.use("/api/users", userRoute);
+
+
+
 //Port listen
   app.listen(process.env.PORT || 5000, () => {
     console.log("Backend server is running");

@@ -2,7 +2,8 @@
 const express = require("express");
 const app =  express();
 //Routes import
-const userRoute = require("./routes/user.js");
+const userRoute = require("./routes/user");
+const authRoute = require("./routes/auth")
 //dotEnv import
 const dotenv = require("dotenv");
 dotenv.config();
@@ -19,7 +20,7 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json())
 //Endpoints
 app.use("/api/users", userRoute);
-
+app.use("/api/auth", authRoute);
 
 
 //Port listen
